@@ -28,6 +28,13 @@ class SystemColors with ChangeNotifier {
   Color backgroundColor1 = Color(0xFFFFFFFF);
   Color backgroundColor2 = Color(0xFF191919);
 
+  Color unselectedColor1 = Color(0xFFC0C0C0);
+  Color unselectedColor2 = Color(0xFF303030);
+
+  Color unselectedColor() {
+    return _isDark ? this.unselectedColor2 : this.unselectedColor1;
+  }
+
   Color saudeColor1 = Color(0xFF5BD44D);
   Color roupaColor1 = Color(0xFFDDDB47);
   Color comidaColor1 = Color(0xFFFD2121);
@@ -66,7 +73,6 @@ class SystemColors with ChangeNotifier {
   ThemeData light() {
     return ThemeData(
       brightness: Brightness.light,
-      accentColor: this.backgroundColor2,
       appBarTheme: AppBarTheme(
           iconTheme: IconThemeData(color: this.backgroundColor2),
           color: this.backgroundColor1),
@@ -80,7 +86,6 @@ class SystemColors with ChangeNotifier {
   ThemeData dark() {
     return ThemeData(
       brightness: Brightness.dark,
-      accentColor: this.backgroundColor2,
       appBarTheme: AppBarTheme(
           iconTheme: IconThemeData(color: this.backgroundColor1),
           color: this.backgroundColor2),

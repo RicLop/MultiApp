@@ -1,7 +1,6 @@
 import 'package:multi/models/banner_card.dart';
+import 'package:multi/components/CardImageCategories.dart';
 import 'package:flutter/material.dart';
-
-import 'CardImage.dart';
 
 class Categories extends StatelessWidget {
   final List<CardImageItem> items;
@@ -9,7 +8,7 @@ class Categories extends StatelessWidget {
   const Categories({@required this.items});
 
   List<Widget> _buildCategories() => items
-      .map((category) => CardImage(
+      .map((category) => CardImageCategories(
             image: category.image,
             text: category.text,
           ))
@@ -18,11 +17,11 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: 500,
       margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.only(top: 12, left: 12),
-      alignment: Alignment.topLeft,
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
@@ -34,7 +33,7 @@ class Categories extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.vertical,
               children: _buildCategories(),
             ),
           ),

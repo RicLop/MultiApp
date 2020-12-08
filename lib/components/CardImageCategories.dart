@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-class CardImageRestaurant extends StatelessWidget {
+class CardImageCategories extends StatelessWidget {
   final String image;
   final String text;
   final CardImageType format;
+  final CrossAxisAlignment textAlign;
 
-  const CardImageRestaurant({
+  const CardImageCategories({
     @required this.image,
     @required this.text,
     this.format = CardImageType.banner,
+    this.textAlign = CrossAxisAlignment.center,
   });
 
   @override
@@ -16,23 +18,22 @@ class CardImageRestaurant extends StatelessWidget {
     final double imageHeight = handleImageHeight(format);
 
     return Container(
-      margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+      margin: EdgeInsets.only(right: 10),
       child: Column(
+        crossAxisAlignment: textAlign,
         children: <Widget>[
           Container(
-            height: 80.0,
-            width: 80.0,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(image),
-                fit: BoxFit.fill,
-              ),
-              shape: BoxShape.circle,
+            margin: EdgeInsets.only(bottom: 10),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.asset(image, height: imageHeight),
             ),
           ),
           Text(
             text,
-            style: TextStyle(),
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ],
       ),

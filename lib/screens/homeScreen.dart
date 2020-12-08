@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:multi/components/navDrawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../components/navDrawer.dart';
+import 'homeListView.dart';
 
 class HomeScreen extends StatefulWidget {
   final SystemColors currentSystem;
@@ -38,13 +39,13 @@ class _HomeScreenState extends State<HomeScreen>
     setState(() {
       deselectAll();
       if (value == 0) {
-        _saudeSelected = true;
-      } else if (value == 1) {
         _roupaSelected = true;
-      } else if (value == 2) {
-        _comidaSelected = true;
-      } else if (value == 3) {
+      } else if (value == 1) {
         _petSelected = true;
+      } else if (value == 2) {
+        _saudeSelected = true;
+      } else if (value == 3) {
+        _comidaSelected = true;
       }
     });
   }
@@ -62,6 +63,31 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavDrawer(),
+      bottomNavigationBar: TabBar(
+          controller: _controller,
+          indicatorColor: Colors.transparent,
+          tabs: [
+            Tab(
+                icon: Icon(FontAwesomeIcons.cartArrowDown,
+                    color: _roupaSelected
+                        ? widget.currentSystem.roupaColor()
+                        : widget.currentSystem.unselectedColor())),
+            Tab(
+                icon: Icon(FontAwesomeIcons.paw,
+                    color: _petSelected
+                        ? widget.currentSystem.petColor()
+                        : widget.currentSystem.unselectedColor())),
+            Tab(
+                icon: Icon(FontAwesomeIcons.briefcaseMedical,
+                    color: _saudeSelected
+                        ? widget.currentSystem.saudeColor()
+                        : widget.currentSystem.unselectedColor())),
+            Tab(
+                icon: Icon(FontAwesomeIcons.utensils,
+                    color: _comidaSelected
+                        ? widget.currentSystem.comidaColor()
+                        : widget.currentSystem.unselectedColor())),
+          ]),
       appBar: AppBar(
         actions: [
           Padding(
@@ -74,48 +100,32 @@ class _HomeScreenState extends State<HomeScreen>
                           widget.currentSystem.switchTheme();
                         });
                       },
-                      child: new Icon(
-                        FontAwesomeIcons.lightbulb,
-                      )))),
+                      child: new Icon(FontAwesomeIcons.lightbulb)))),
         ],
         elevation: 10,
         centerTitle: true,
-        bottom: TabBar(
-            controller: _controller,
-            unselectedLabelColor: Colors.black,
-            indicatorColor: Colors.white,
-            tabs: [
-              Tab(
-                  icon: Icon(FontAwesomeIcons.briefcaseMedical,
-                      color: _saudeSelected
-                          ? Theme.of(context).appBarTheme.iconTheme.color
-                          : widget.currentSystem.saudeColor())),
-              Tab(
-                  icon: Icon(FontAwesomeIcons.tshirt,
-                      color: _roupaSelected
-                          ? Theme.of(context).appBarTheme.iconTheme.color
-                          : widget.currentSystem.roupaColor())),
-              Tab(
-                  icon: Icon(FontAwesomeIcons.utensils,
-                      color: _comidaSelected
-                          ? Theme.of(context).appBarTheme.iconTheme.color
-                          : widget.currentSystem.comidaColor())),
-              Tab(
-                  icon: Icon(FontAwesomeIcons.paw,
-                      color: _petSelected
-                          ? Theme.of(context).appBarTheme.iconTheme.color
-                          : widget.currentSystem.petColor())),
-            ]),
       ),
       body: TabBarView(controller: _controller, children: [
         HomeListView(
-            companies: companies, categories: categories, banners: banners),
+            actualTab: AppTab.cloth,
+            companies: companies,
+            categories: categories,
+            banners: banners),
         HomeListView(
-            companies: companies, categories: categories, banners: banners),
+            actualTab: AppTab.pet,
+            companies: companies,
+            categories: categories,
+            banners: banners),
         HomeListView(
-            companies: companies, categories: categories, banners: banners),
+            actualTab: AppTab.pharmacy,
+            companies: companies,
+            categories: categories,
+            banners: banners),
         HomeListView(
-            companies: companies, categories: categories, banners: banners),
+            actualTab: AppTab.restaurants,
+            companies: companies,
+            categories: categories,
+            banners: banners),
       ]),
     );
   }

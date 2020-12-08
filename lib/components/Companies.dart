@@ -1,15 +1,18 @@
 import 'package:multi/models/banner_card.dart';
 import 'package:flutter/material.dart';
 
-import 'CardImageRestaurant.dart';
+import '../screens/homeListView.dart';
+import '../screens/homeListView.dart';
+import 'CardImageCompanies.dart';
 
 class Companies extends StatelessWidget {
   final List<CardImageItem> items;
+  final AppTab actualTab;
 
-  const Companies({@required this.items});
+  const Companies({@required this.actualTab, @required this.items});
 
   List<Widget> _buildCategories() => items
-      .map((category) => CardImageRestaurant(
+      .map((category) => CardImageCompany(
             image: category.image,
             text: category.text,
           ))
@@ -19,7 +22,7 @@ class Companies extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 150,
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.only(top: 10, bottom: 10),
       padding: EdgeInsets.only(top: 12, left: 12),
       alignment: Alignment.topLeft,
       child: Column(
@@ -28,7 +31,7 @@ class Companies extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(bottom: 10),
             child: Text(
-              'Restaurantes',
+              getTitle(this.actualTab),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
           ),
@@ -41,5 +44,23 @@ class Companies extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String getTitle(AppTab actualTab) {
+    switch (actualTab) {
+      case AppTab.pharmacy:
+        return 'Farmácias';
+        break;
+      case AppTab.cloth:
+        return 'Lojas';
+        break;
+      case AppTab.restaurants:
+        return 'Restaurantes';
+        break;
+      case AppTab.pet:
+        return 'PetShops';
+        break;
+      default:
+    }
   }
 }
