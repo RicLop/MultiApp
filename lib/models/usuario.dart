@@ -1,4 +1,4 @@
-import 'package:Multi/models/empresa.dart';
+import 'package:multi/models/empresa.dart';
 
 class Usuario {
   String id;

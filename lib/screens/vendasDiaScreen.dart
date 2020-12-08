@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:Multi/components/ChartSeries.dart';
-import 'package:Multi/models/objeto.dart';
+import 'package:multi/components/ChartSeries.dart';
+import 'package:multi/models/objeto.dart';
 import 'package:flutter/material.dart';
-import 'package:Multi/components/NavDrawer.dart';
+import 'package:multi/components/NavDrawer.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import '../components/NavDrawer.dart';
 

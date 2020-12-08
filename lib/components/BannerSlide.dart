@@ -1,5 +1,5 @@
-import 'package:Multi/components/CardImage.dart';
-import 'package:Multi/models/banner_card.dart';
+import 'package:multi/components/CardImage.dart';
+import 'package:multi/models/banner_card.dart';
 import 'package:flutter/material.dart';
 
 class BannerSlide extends StatelessWidget {
@@ -19,7 +19,6 @@ class BannerSlide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.only(left: 12, top: 15),
         child: Container(

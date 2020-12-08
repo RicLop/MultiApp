@@ -1,14 +1,16 @@
-import 'package:Multi/components/Carousel.dart';
-import 'package:Multi/models/banner_card.dart';
-import 'package:Multi/models/bottom_navigator_item.dart';
-import 'package:Multi/screens/homeSiis.dart';
+import 'package:multi/components/Carousel.dart';
+import 'package:multi/components/Styles.dart';
+import 'package:multi/models/banner_card.dart';
+import 'package:multi/screens/homeListView.dart';
 import 'package:flutter/material.dart';
-import 'package:Multi/components/navDrawer.dart';
+import 'package:multi/components/navDrawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../components/navDrawer.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key}) : super(key: key);
+  final SystemColors currentSystem;
+
+  HomeScreen({this.currentSystem, Key key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -16,22 +18,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  var _color = Colors.white;
-  var _saudeColor = Color(0xFF59E949);
-  var _roupaColor = Color(0xFFFFCA38);
-  var _comidaColor = Color(0xFFFF4444);
-  var _petColor = Color(0xFF2E70FF);
-  var _saudeSelected = false;
-  var _roupaSelected = false;
-  var _comidaSelected = false;
-  var _petSelected = false;
-  var _selectedColor = Colors.black;
+  bool _saudeSelected = false;
+  bool _roupaSelected = false;
+  bool _comidaSelected = false;
+  bool _petSelected = false;
   TabController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = new TabController(vsync: this, length: 4);
+    _comidaSelected = true;
+    _controller = new TabController(vsync: this, length: 4, initialIndex: 2);
     _controller.addListener(() {
       onTabChange(_controller.index);
     });
@@ -41,20 +38,12 @@ class _HomeScreenState extends State<HomeScreen>
     setState(() {
       deselectAll();
       if (value == 0) {
-        //_color = _saudeColor;
-
         _saudeSelected = true;
       } else if (value == 1) {
-        //_color = _roupaColor;
-
         _roupaSelected = true;
       } else if (value == 2) {
-        //_color = _comidaColor;
-
         _comidaSelected = true;
       } else if (value == 3) {
-        //_color = _petColor;
-
         _petSelected = true;
       }
     });
@@ -74,9 +63,22 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
-        //title: Text("Titulo", style: TextStyle(color: Colors.black)),
+        actions: [
+          Padding(
+              padding: EdgeInsets.only(),
+              child: Container(
+                  child: FlatButton(
+                      color: Color(0x00FFFFFF),
+                      onPressed: () {
+                        setState(() {
+                          widget.currentSystem.switchTheme();
+                        });
+                      },
+                      child: new Icon(
+                        FontAwesomeIcons.lightbulb,
+                      )))),
+        ],
         elevation: 10,
-        backgroundColor: _color,
         centerTitle: true,
         bottom: TabBar(
             controller: _controller,
@@ -85,23 +87,35 @@ class _HomeScreenState extends State<HomeScreen>
             tabs: [
               Tab(
                   icon: Icon(FontAwesomeIcons.briefcaseMedical,
-                      color: _saudeSelected ? _selectedColor : _saudeColor)),
+                      color: _saudeSelected
+                          ? Theme.of(context).appBarTheme.iconTheme.color
+                          : widget.currentSystem.saudeColor())),
               Tab(
                   icon: Icon(FontAwesomeIcons.tshirt,
-                      color: _roupaSelected ? _selectedColor : _roupaColor)),
+                      color: _roupaSelected
+                          ? Theme.of(context).appBarTheme.iconTheme.color
+                          : widget.currentSystem.roupaColor())),
               Tab(
                   icon: Icon(FontAwesomeIcons.utensils,
-                      color: _comidaSelected ? _selectedColor : _comidaColor)),
+                      color: _comidaSelected
+                          ? Theme.of(context).appBarTheme.iconTheme.color
+                          : widget.currentSystem.comidaColor())),
               Tab(
                   icon: Icon(FontAwesomeIcons.paw,
-                      color: _petSelected ? _selectedColor : _petColor)),
+                      color: _petSelected
+                          ? Theme.of(context).appBarTheme.iconTheme.color
+                          : widget.currentSystem.petColor())),
             ]),
       ),
       body: TabBarView(controller: _controller, children: [
-        CustomCarousel(),
-        Text("2"),
-        Home(menus: menus, categories: categories, banners: banners),
-        Text("4")
+        HomeListView(
+            companies: companies, categories: categories, banners: banners),
+        HomeListView(
+            companies: companies, categories: categories, banners: banners),
+        HomeListView(
+            companies: companies, categories: categories, banners: banners),
+        HomeListView(
+            companies: companies, categories: categories, banners: banners),
       ]),
     );
   }
@@ -112,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen>
         text: 'Confira sua entrega grátis na sacola'),
     CardImageItem(
         image: 'lib/assets/images/restaurantes-1.png',
-        text: 'A taxa é corterisa para voce'),
+        text: 'A taxa é cortesia para voce'),
     CardImageItem(
         image: 'lib/assets/images/restaurantes-2.png',
         text: 'Comida gostosa e sem taxas'),
@@ -121,18 +135,21 @@ class _HomeScreenState extends State<HomeScreen>
         text: 'Peça e retira no restaurante'),
   ];
 
+  final List<CardImageItem> companies = [
+    CardImageItem(image: 'lib/assets/images/company1.png', text: 'MC Donald'),
+    CardImageItem(
+        image: 'lib/assets/images/company2.png', text: 'Burguer King'),
+    CardImageItem(image: 'lib/assets/images/company3.png', text: 'KFC'),
+    CardImageItem(
+        image: 'lib/assets/images/company4.png', text: 'Ben & Jarry\'s'),
+    CardImageItem(image: 'lib/assets/images/bebidas.png', text: 'Trip N Trips'),
+  ];
+
   final List<CardImageItem> categories = [
     CardImageItem(image: 'lib/assets/images/pizza.png', text: 'Pizza'),
     CardImageItem(image: 'lib/assets/images/lanches.png', text: 'Lanches'),
     CardImageItem(image: 'lib/assets/images/acai.png', text: 'Açai'),
     CardImageItem(image: 'lib/assets/images/japonesa.png', text: 'Japonesa'),
     CardImageItem(image: 'lib/assets/images/bebidas.png', text: 'Bebidas'),
-  ];
-
-  final List<BottomNavigatorItem> menus = [
-    BottomNavigatorItem(icon: Icons.home, text: 'Início'),
-    BottomNavigatorItem(icon: Icons.search, text: 'Busca'),
-    BottomNavigatorItem(icon: Icons.receipt, text: 'Pedidos'),
-    BottomNavigatorItem(icon: Icons.person_outline, text: 'Perfil'),
   ];
 }

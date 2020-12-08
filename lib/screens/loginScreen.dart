@@ -1,15 +1,15 @@
 import 'dart:convert';
 
-import 'package:Multi/components/Button.dart';
-import 'package:Multi/components/dialog.dart';
-import 'package:Multi/models/empresa.dart';
-import 'package:Multi/screens/homeScreen.dart';
+import 'package:multi/components/Button.dart';
+import 'package:multi/components/dialog.dart';
+import 'package:multi/models/empresa.dart';
+import 'package:multi/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:Multi/components/textField.dart';
-import 'package:Multi/models/usuario.dart';
+import 'package:multi/components/textField.dart';
+import 'package:multi/models/usuario.dart';
 
 class LoginScreen extends StatefulWidget {
   static Usuario usuarioLogado = new Usuario();

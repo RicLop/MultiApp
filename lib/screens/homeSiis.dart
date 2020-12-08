@@ -1,10 +1,10 @@
-import 'package:Multi/components/BannerSlide.dart';
-import 'package:Multi/components/Categories.dart';
-import 'package:Multi/components/GourmetRestaurant.dart';
-import 'package:Multi/components/Location.dart';
-import 'package:Multi/components/Search.dart';
-import 'package:Multi/models/banner_card.dart';
-import 'package:Multi/models/bottom_navigator_item.dart';
+import 'package:multi/components/BannerSlide.dart';
+import 'package:multi/components/Categories.dart';
+import 'package:multi/components/GourmetRestaurant.dart';
+import 'package:multi/components/Location.dart';
+import 'package:multi/components/Search.dart';
+import 'package:multi/models/banner_card.dart';
+import 'package:multi/models/bottom_navigator_item.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {

@@ -1,7 +1,7 @@
-import 'package:Multi/screens/homeScreen.dart';
-import 'package:Multi/screens/posicaoScreen.dart';
-import 'package:Multi/screens/vendasAnoScreen.dart';
-import 'package:Multi/screens/vendasDiaScreen.dart';
+import 'package:multi/screens/homeScreen.dart';
+import 'package:multi/screens/posicaoScreen.dart';
+import 'package:multi/screens/vendasAnoScreen.dart';
+import 'package:multi/screens/vendasDiaScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/dashBoardScreen.dart';
@@ -49,7 +49,7 @@ class _NavDrawerState extends State<NavDrawer> {
             child: SizedBox(
               height: 155.0,
               child: Image.asset(
-                "lib/assets/logo_Multi.png",
+                "lib/assets/logo_multi.png",
                 fit: BoxFit.contain,
               ),
             ),

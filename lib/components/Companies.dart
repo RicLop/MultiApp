@@ -1,15 +1,15 @@
 import 'package:multi/models/banner_card.dart';
 import 'package:flutter/material.dart';
 
-import 'CardImage.dart';
+import 'CardImageRestaurant.dart';
 
-class Categories extends StatelessWidget {
+class Companies extends StatelessWidget {
   final List<CardImageItem> items;
 
-  const Categories({@required this.items});
+  const Companies({@required this.items});
 
   List<Widget> _buildCategories() => items
-      .map((category) => CardImage(
+      .map((category) => CardImageRestaurant(
             image: category.image,
             text: category.text,
           ))
@@ -28,7 +28,7 @@ class Categories extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(bottom: 10),
             child: Text(
-              'Categorias',
+              'Restaurantes',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
           ),

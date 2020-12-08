@@ -1,39 +1,40 @@
-import 'package:flutter/material.dart';
+library config.globals;
 
-import 'screens/loginScreen.dart';
+import 'package:flutter/material.dart';
+import 'package:multi/screens/homeScreen.dart';
+import 'package:multi/components/Styles.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+SystemColors currentSystem = SystemColors();
+
+class MyApp extends StatefulWidget {
+  MyApp({Key key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    currentSystem.addListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Multi',
+      title: 'multi',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          brightness: Brightness.light,
-          primaryColor: Color.fromRGBO(7, 77, 102, 1),
-          accentColor: Color.fromRGBO(7, 77, 102, 1),
-          buttonColor: Color.fromRGBO(240, 133, 33, 1),
-          inputDecorationTheme: InputDecorationTheme(
-            focusColor: Colors.black,
-            labelStyle: TextStyle(
-              color: Colors.black54,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.black,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.black,
-                width: 2.0,
-              ),
-            ),
-          )),
-      home: LoginScreen(),
+      theme: currentSystem.light(),
+      darkTheme: currentSystem.dark(),
+      themeMode: currentSystem.currentTheme(),
+      home: HomeScreen(
+        currentSystem: currentSystem,
+      ),
     );
   }
 }

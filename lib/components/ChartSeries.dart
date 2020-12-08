@@ -1,4 +1,4 @@
-import 'package:Multi/models/objeto.dart';
+import 'package:multi/models/objeto.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 charts.Series<Objeto, String> newChartSerie(List data) {
